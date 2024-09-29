@@ -139,7 +139,7 @@ if __name__ == '__main__':
             result = map_reduce(text)
 
             # Виведення та візуалізація топ слів
-            visualize_top_words(result, top_n=15)
+            visualize_top_words(result, top_n=20)
         else:
             raise ValueError("Текст не був завантажений.")
     except Exception as e:
