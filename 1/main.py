@@ -5,6 +5,13 @@ from aiopath import AsyncPath
 import logging
 
 async def copy_file(file: AsyncPath, dest: AsyncPath):
+    """
+    Асинхронно копіює файл до відповідної папки за розширенням.
+
+    Args:
+        file (AsyncPath): Шлях до файлу для копіювання.
+        dest (AsyncPath): Шлях до цільової папки.
+    """
     try:
         ext = file.suffix[1:]
         if not ext:
@@ -20,6 +27,13 @@ async def copy_file(file: AsyncPath, dest: AsyncPath):
         logging.error("Помилка при операціях з папками/файлами", e)    
 
 async def read_folder(outp_p: AsyncPath, dist_p: AsyncPath):
+    """
+    Рекурсивно обходить вказану папку та копіює файли до відповідних папок за розширеннями.
+
+    Args:
+        outp_p (AsyncPath): Шлях до вихідної папки.
+        dist_p (AsyncPath): Шлях до цільової папки.
+    """
     try:
         if not await outp_p.exists() or not await outp_p.is_dir():
             logging.error("За вказаним шляхом не знайдено необхідної папки")
@@ -35,6 +49,10 @@ async def read_folder(outp_p: AsyncPath, dist_p: AsyncPath):
         logging.error("Помилка при операціях з папками/файлами", e)
 
 def main():
+    """
+    Головна функція для запуску скрипту.
+    Парсить аргументи командного рядка, ініціалізує логування та запускає асинхронну обробку.
+    """
     parser = ArgumentParser()
     parser.add_argument("-s", "--source", help="Source folder", default="1")
     parser.add_argument("-d", "--destination", help="Destination folder", default="Result")
